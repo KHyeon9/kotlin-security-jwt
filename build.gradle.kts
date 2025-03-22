@@ -19,25 +19,34 @@ repositories {
 }
 
 dependencies {
-	// web
+	// Web
 	implementation("org.springframework.boot:spring-boot-starter-web")
 
-	// security
+	// Security
 	implementation("org.springframework.boot:spring-boot-starter-security")
 
-	// devtools
+	// Devtools
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
-	// kotlin
+	// Kotlin
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+	// DB
+	runtimeOnly("com.h2database:h2")
+
+	// JPA
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
 	// JWT
 	implementation("io.jsonwebtoken:jjwt-api:0.12.5")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.5")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.5")
 
-	// test
+	// Log
+	implementation("io.github.microutils:kotlin-logging:3.0.5")
+
+	// Test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testImplementation("org.springframework.security:spring-security-test")
