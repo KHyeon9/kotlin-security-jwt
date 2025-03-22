@@ -1,0 +1,5 @@
+jwt:
+  secret-key: kotlin_spring_security_with_jwt.study_application_2025.secret_key
+  token:
+    # 30 days
+    expired-time-ms: 2592000000
