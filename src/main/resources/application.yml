@@ -1,3 +1,25 @@
+spring:
+  application:
+    name: kotlin-security-jwt
+  # h2 셋팅
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        highlight_sql: true
+  h2:
+    console:
+      enabled: true
+
 jwt:
   secret-key: kotlin_spring_security_with_jwt.study_application_2025.secret_key
   token:
