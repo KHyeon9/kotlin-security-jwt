@@ -7,7 +7,12 @@ import java.nio.charset.StandardCharsets
 import java.util.*
 import javax.crypto.SecretKey
 
-class JwtTokenUtils {
+object JwtTokenUtils {
+
+    // userId 반환
+    fun getUserId(token: String, key: String): String? {
+        return extractClaims(token, key).get("userId", String::class.java)
+    }
 
     // 토큰 종료 확인
     fun isExpired(token: String, key: String): Boolean {
@@ -25,9 +30,9 @@ class JwtTokenUtils {
     }
 
     // 토큰 생성
-    fun createJwtToken(userId: String, key: String): String {
+    fun createJwtToken(userId: String, key: String, expiredTimeMs: Long): String {
         val now = Date()
-        val validity = Date(now.time + 3600 * 24) // 하루 뒤 만료하도록 설정
+        val validity = Date(now.time + expiredTimeMs) // 하루 뒤 만료하도록 설정
 
         return Jwts.builder()
             .claim("userId", userId)
