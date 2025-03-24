@@ -3,6 +3,7 @@ package com.kotlin.springsecurity.config
 import com.kotlin.springsecurity.dto.user.UserAccountDto
 import com.kotlin.springsecurity.service.UserAccountService
 import com.kotlin.springsecurity.util.JwtTokenUtils
+import com.kotlin.springsecurity.util.ServiceUtils
 import io.jsonwebtoken.Claims
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -11,8 +12,9 @@ import org.springframework.stereotype.Component
 
 @Component
 class JwtTokenProvider(
-    private val userAccountService: UserAccountService
+    private val serviceUtils: ServiceUtils
 ) {
+
     @Value("\${jwt.secret-key}")
     private lateinit var secretKey: String
     @Value("\${jwt.token.expired-time-ms}")
@@ -34,7 +36,7 @@ class JwtTokenProvider(
         val userId = claims["userId"].toString()
 
         val userAccountDto : UserAccountDto = UserAccountDto.fromEntity(
-            userAccountService.loadUserByUserId(userId)
+            serviceUtils.loadUserByUserId(userId)
         )
 
         val userDetails = User(
