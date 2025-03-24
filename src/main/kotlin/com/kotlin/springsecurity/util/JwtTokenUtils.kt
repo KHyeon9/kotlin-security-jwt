@@ -10,14 +10,18 @@ import javax.crypto.SecretKey
 object JwtTokenUtils {
 
     // userId 반환
-    fun getUserId(token: String, key: String): String? {
+    fun getUserId(token: String, key: String): String {
         return extractClaims(token, key).get("userId", String::class.java)
     }
 
     // 토큰 종료 확인
     fun isExpired(token: String, key: String): Boolean {
-        val expiredDate = extractClaims(token, key).expiration // 토큰과 키로 시간값 가져옴
-        return expiredDate.before(Date()) // 만료된 토큰인지 확인
+        try {
+            val expiredDate = extractClaims(token, key).expiration // 토큰과 키로 시간값 가져옴
+            return expiredDate.before(Date()) // 만료된 토큰인지 확인
+        } catch (e: Exception) {
+            throw RuntimeException("JWT 토큰 만료 검증 에러", e)
+        }
     }
 
     // claim 추출

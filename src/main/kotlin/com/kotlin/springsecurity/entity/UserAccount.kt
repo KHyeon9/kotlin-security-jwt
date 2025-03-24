@@ -1,8 +1,10 @@
 package com.kotlin.springsecurity.entity
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.kotlin.springsecurity.dto.user.RoleType
-import com.kotlin.springsecurity.entity.auditing.AuditingFields
 import jakarta.persistence.*
+import java.time.LocalDateTime
+
 
 @Entity
 @Table(name = "user_account")
@@ -15,6 +17,9 @@ data class UserAccount(
     @Column(name = "nickname", nullable = false)
     var nickname: String,
     @Column(name = "role_type", nullable = false)
-    var roleType: RoleType = RoleType.USER
-) : AuditingFields() {
+    var roleType: RoleType = RoleType.USER,
+    @Column(name = "created_at")
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+) {
+
 }

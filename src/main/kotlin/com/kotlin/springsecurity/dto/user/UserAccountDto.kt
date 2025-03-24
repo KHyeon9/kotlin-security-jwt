@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 
 data class UserAccountDto(
     var userId: String,
-    var password: String,
+    private var password: String,
     var nickname: String = "",
     var roleType: RoleType = RoleType.USER,
     val createdAt: LocalDateTime? = null,
@@ -23,9 +23,12 @@ data class UserAccountDto(
                 userAccount.nickname,
                 userAccount.roleType,
                 userAccount.createdAt,
-                userAccount.createdBy
             )
         }
+    }
+
+    fun changePassword(newPassword: String) {
+        password = newPassword
     }
 
     override fun getAuthorities(): Collection<GrantedAuthority>
