@@ -8,6 +8,7 @@ import org.springframework.data.domain.AuditorAware
 import org.springframework.security.core.context.SecurityContextHolder
 import java.util.*
 
+@Deprecated("auditing을 사용 안하므로 기본 셋팅만 남김")
 @Configuration
 class JpaConfig {
 

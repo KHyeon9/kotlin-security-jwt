@@ -19,7 +19,7 @@ spring:
   h2:
     console:
       enabled: true
-
+# jwt에서 사용할 키와 종료 시간 셋팅
 jwt:
   secret-key: kotlin_spring_security_with_jwt.study_application_2025.secret_key
   token:
