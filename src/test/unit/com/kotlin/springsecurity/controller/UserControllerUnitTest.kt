@@ -1,5 +1,8 @@
 package com.kotlin.springsecurity.controller
 
+import com.kotlin.springsecurity.controller.request.UserLoginRequest
+import com.kotlin.springsecurity.controller.request.UserRegistRequest
+import com.kotlin.springsecurity.controller.response.UserLoginResponse
 import com.kotlin.springsecurity.controller.response.UserResponse
 import com.kotlin.springsecurity.controller.user.UserController
 import com.kotlin.springsecurity.dto.user.UserAccountDto
@@ -13,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.context.annotation.Import
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.test.web.reactive.server.WebTestClient
 import kotlin.test.assertTrue
 
@@ -33,10 +35,14 @@ class UserControllerUnitTest {
     fun regist() {
         val userId = "tester"
         val password = "dummypassword"
+        val nickname = "tester"
+
+        val request = UserRegistRequest(userId, password, nickname)
 
         val userAccountDto = UserAccountDto(
             userId,
-            password
+            password,
+            nickname
         )
 
         every {
@@ -48,15 +54,40 @@ class UserControllerUnitTest {
         val response = webTestClient
             .post()
             .uri("/v1/user/regist")
-            .bodyValue(userAccountDto)
+            .bodyValue(request)
             .exchange()
             .expectStatus().isCreated
             .expectBody(UserResponse::class.java)
             .returnResult()
             .responseBody
 
-        println("response : $response")
+        assertTrue { response!!.userId == request.userId }
+        assertTrue { response!!.nickname == request.nickname }
+    }
 
-        assertTrue { response!!.userId == userId }
+    @DisplayName("로그인")
+    @Test
+    fun login() {
+        val userId = "tester"
+        val password = "dummypassword"
+
+        val request = UserLoginRequest(userId, password)
+
+        every {
+            userAccountServiceMock.login(userId, password)
+        } returns "jwt-token"
+
+
+        val response = webTestClient
+            .post()
+            .uri("/v1/user/login")
+            .bodyValue(request)
+            .exchange()
+            .expectStatus().isOk
+            .expectBody(UserLoginResponse::class.java)
+            .returnResult()
+            .responseBody
+
+        assertTrue { response!!.token != null }
     }
 }
