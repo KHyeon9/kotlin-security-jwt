@@ -48,10 +48,15 @@ dependencies {
 	implementation("io.github.microutils:kotlin-logging:3.0.5")
 
 	// Test
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-	testImplementation("org.springframework.security:spring-security-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.security:spring-security-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-webflux")
+
+	// Mock
+	testImplementation("io.mockk:mockk:1.13.17")
+	testImplementation("com.ninja-squad:springmockk:4.0.2")
 }
 
 kotlin {
@@ -62,4 +67,12 @@ kotlin {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+sourceSets {
+	test {
+		java {
+			setSrcDirs(listOf("src/test/intg", "src/test/unit", "src/test/utils"))
+		}
+	}
 }
