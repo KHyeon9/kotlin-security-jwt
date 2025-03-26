@@ -31,10 +31,8 @@ spring:
             user-name-attribute: id
         registration:
           kakao:
-#            client-id: ${KAKAO_OAUTH_CLIENT_ID} # REST API 키
-#            client-secret: ${KAKAO_OAUTH_CLIENT_SECRET} # 카카오 로그인의 Client Secret
-            client-id: 30dd531f0d0ea63bb44d5329c52065fb # REST API 키
-            client-secret: KJU58fBgM2K2ZyDF2ViGXyyz1W8J9SZc # 카카오 로그인의 Client Secret
+            client-id: ${KAKAO_OAUTH_CLIENT_ID} # REST API 키
+            client-secret: ${KAKAO_OAUTH_CLIENT_SECRET} # 카카오 로그인의 Client Secret
             client-authentication-method: client_secret_post
             redirect-uri: http://localhost:8080/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
