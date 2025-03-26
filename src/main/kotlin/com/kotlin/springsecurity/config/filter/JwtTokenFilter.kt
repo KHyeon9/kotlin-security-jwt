@@ -22,10 +22,8 @@ class JwtTokenFilter(
         filterChain: FilterChain
     ) {
 
-        var token: String?
-
         try {
-          val header: String? = request.getHeader(HttpHeaders.AUTHORIZATION) // 헤더의 authorization 가져오기
+          val header = request.getHeader(HttpHeaders.AUTHORIZATION) // 헤더의 authorization 가져오기
 
           // header가 null이거나 token값이 아닌 경우
           if (header == null || !header.startsWith("Bearer ")) {
@@ -65,7 +63,7 @@ class JwtTokenFilter(
     }
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
-        val excludedUrls = listOf("/h2-console", "/v1/user")
+        val excludedUrls = listOf("/h2-console", "/v1/user", "/images", "/auth")
         return excludedUrls.any { request.requestURI.startsWith(it) }
     }
 }
