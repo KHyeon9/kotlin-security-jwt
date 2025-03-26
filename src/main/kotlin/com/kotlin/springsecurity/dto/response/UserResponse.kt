@@ -1,4 +1,4 @@
-package com.kotlin.springsecurity.controller.response
+package com.kotlin.springsecurity.dto.response
 
 import com.kotlin.springsecurity.dto.user.UserAccountDto
 

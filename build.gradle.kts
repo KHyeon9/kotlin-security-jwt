@@ -47,6 +47,12 @@ dependencies {
 	// Log
 	implementation("io.github.microutils:kotlin-logging:3.0.5")
 
+	//Oauth
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+
+	// Thymeleaf
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+
 	// Test
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")

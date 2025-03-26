@@ -16,5 +16,8 @@ class CustomAuthenticationEntryPoint : AuthenticationEntryPoint {
     ) {
         response.contentType = MediaType.APPLICATION_JSON.toString()
         response.status = ErrorCode.INVALID_TOKEN.status.value()
+
+        // 오류 메시지 포함
+        response.writer.write("${ErrorCode.INVALID_TOKEN.status.value()}")
     }
 }

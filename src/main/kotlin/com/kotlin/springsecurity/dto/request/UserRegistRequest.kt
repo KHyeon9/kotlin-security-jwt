@@ -1,4 +1,4 @@
-package com.kotlin.springsecurity.controller.request
+package com.kotlin.springsecurity.dto.request
 
 data class UserRegistRequest(
     val userId: String,
