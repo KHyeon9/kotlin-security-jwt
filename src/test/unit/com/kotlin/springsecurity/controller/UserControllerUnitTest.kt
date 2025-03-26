@@ -1,9 +1,9 @@
 package com.kotlin.springsecurity.controller
 
-import com.kotlin.springsecurity.controller.request.UserLoginRequest
-import com.kotlin.springsecurity.controller.request.UserRegistRequest
-import com.kotlin.springsecurity.controller.response.UserLoginResponse
-import com.kotlin.springsecurity.controller.response.UserResponse
+import com.kotlin.springsecurity.dto.request.UserLoginRequest
+import com.kotlin.springsecurity.dto.request.UserRegistRequest
+import com.kotlin.springsecurity.dto.response.UserLoginResponse
+import com.kotlin.springsecurity.dto.response.UserResponse
 import com.kotlin.springsecurity.controller.user.UserController
 import com.kotlin.springsecurity.dto.user.UserAccountDto
 import com.kotlin.springsecurity.service.UserAccountService
