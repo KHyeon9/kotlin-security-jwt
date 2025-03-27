@@ -1,7 +1,7 @@
 package com.kotlin.springsecurity.service
 
 import com.kotlin.springsecurity.dto.security.KakaoOAuth2Response
-import com.kotlin.springsecurity.util.OAuth2UserFromDto
+import com.kotlin.springsecurity.dto.security.OAuth2UserFromDto
 import com.kotlin.springsecurity.util.ServiceUtils
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
