@@ -1,4 +1,4 @@
-package com.kotlin.springsecurity.util
+package com.kotlin.springsecurity.dto.security
 
 import com.kotlin.springsecurity.dto.user.UserAccountDto
 import org.springframework.security.core.GrantedAuthority
@@ -6,7 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.oauth2.core.user.OAuth2User
 
 class OAuth2UserFromDto(
-    private val userAccountDto: UserAccountDto,
+    val userAccountDto: UserAccountDto,
 ) : OAuth2User {
     override fun getName(): String {
         return userAccountDto.userId
