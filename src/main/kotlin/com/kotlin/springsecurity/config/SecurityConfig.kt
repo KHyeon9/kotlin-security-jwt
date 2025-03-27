@@ -2,6 +2,7 @@ package com.kotlin.springsecurity.config
 
 import com.kotlin.springsecurity.config.filter.JwtTokenFilter
 import com.kotlin.springsecurity.exception.CustomAuthenticationEntryPoint
+import com.kotlin.springsecurity.handler.OAuth2SuccessHandler
 import com.kotlin.springsecurity.service.KakaoOAuthUserService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -13,15 +14,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 class SecurityConfig(
-    private val jwtTokenProvider: JwtTokenProvider
+    private val jwtTokenProvider: JwtTokenProvider,
+    private val oAuth2SuccessHandler: OAuth2SuccessHandler
 ) {
     // 검사를 하지 않는 주소 리스트
     val whiteList = listOf(
         "/h2-console",
         "/h2-console/**",
         "/v1/user/**",
-        "/auth/login/kakao/**",
-        "/auth/kakao/login",
+        "/auth/**",
         "/images/**",
         "/"
     ).toTypedArray()
@@ -52,6 +53,7 @@ class SecurityConfig(
                         .userInfoEndpoint { userInfo ->
                             userInfo.userService(kakaoOAuthUserService) // 인증된 사용자 정보를 처리하는 서비스
                         }
+                        .successHandler(oAuth2SuccessHandler)
                 }
                 .exceptionHandling { handling ->
                     handling.authenticationEntryPoint(
