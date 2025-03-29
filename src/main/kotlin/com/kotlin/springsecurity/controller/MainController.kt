@@ -12,4 +12,9 @@ class MainController {
     fun root() : String {
         return "redirect:/auth/kakao/login"
     }
+
+    @GetMapping("/auth/kakao/login")
+    fun kakaoLogin() : String {
+        return "kakaoLogin"
+    }
 }
