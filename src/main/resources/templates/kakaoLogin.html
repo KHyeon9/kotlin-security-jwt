@@ -8,5 +8,25 @@
   <a role="button" id="kakao-login" th:href="@{/oauth2/authorization/kakao}">
     <img src="/images/kakao_login_medium_narrow.png" alt="Kakao Login Image">
   </a>
+  <h1>Authorization 쿠키 값:</h1>
+  <p id="cookie-value">로그인 후 표시됩니다...</p>
+
+  <script>
+      function getAuthToken() {
+          fetch('/auth/cookie')
+              .then(response => response.text())
+              .then(data => {
+                  document.getElementById("cookie-value").innerText = data;
+              })
+              .catch(error => {
+                  document.getElementById("cookie-value").innerText = "쿠키를 불러오는 데 실패했습니다.";
+                  console.error('오류:', error);
+              });
+      }
+      // OAuth 로그인 후 자동 실행
+      window.onload = function() {
+          getAuthToken();
+      };
+  </script>
 </body>
 </html>
